@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  oracle:
+    image: gvenzl/oracle-xe:21-slim # Nome da imagem
+    container_name: oracledatabase  # Nome do container  
+    #volumes:      
+    #  - ./oracle-volume:/opt/oracle/oradata # Persistindo os dados do diretório oracle-volume na máquina física para o container em /opt/oracle/oradata
+      #- ./initscripts:/container-entrypoint-initdb.d 
+    ports:    
+      - 51521:1521 # Porta na máquina física : Porta do container
+    environment:
+      ORACLE_PASSWORD: oracle # Define a senha do usuário SYSTEM ou SYS (Atribuição: SYSDBA)
+      ORACLE_DATABASE : database_name # O arquivo docker-compose cria outro banco de dados nomeado database_name junto com o banco de dados padrão XEPDB1
+      APP_USER: diego # Criar usuário
+      APP_USER_PASSWORD: oracle # Definir senha do usuário
+#volumes: # Mapeando diretórios na máquina física
+#  oracle-volume:
+  #initscripts:
